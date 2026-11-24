@@ -131,6 +131,7 @@ export async function iniciarFirebase(config) {
         const h = snap.data() || {};
         info = { inviteCode: h.inviteCode, owner: h.owner, usuarios: h.usuarios || [] };
         data.meta = { ...dadosVazios().meta, ...(h.meta || {}) };
+        if (h.nome && (!h.meta?.nome || h.meta.nome === 'Minha família')) data.meta.nome = h.nome;
         carregouMeta = true; onChange(); talvezPronto();
       });
 
