@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lar em Dia</title>
+  <meta name="description" content="Contas da casa em dia: alertas de vencimento, cartões, contas fixas e planejamento financeiro da família.">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="auth" hidden></div>
+
+  <div id="app" hidden>
+    <aside class="lateral">
+      <div class="logo"><img src="icons/icon.svg" alt=""> Lar em Dia</div>
+      <div class="familia" id="familia-nome"></div>
+      <nav class="menu">
+        <a href="#painel"><span>🏠</span> Painel <b class="badge" data-badge="alertas" hidden></b></a>
+        <a href="#contas"><span>📋</span> Contas do mês</a>
+        <a href="#calendario"><span>🗓️</span> Calendário</a>
+        <a href="#cartoes"><span>💳</span> Cartões</a>
+        <a href="#planejamento"><span>🎯</span> Planejamento</a>
+        <a href="#config"><span>⚙️</span> Família e ajustes</a>
+      </nav>
+      <div class="modo-local" id="modo-local" hidden>Modo local · dados só neste navegador</div>
+    </aside>
+
+    <main>
+      <header class="topo">
+        <div class="topo-l">
+          <h1 id="titulo">Painel</h1>
+          <div class="mes-nav" id="mes-nav">
+            <button class="ic" data-act="mes-ant" aria-label="Mês anterior">‹</button>
+            <button class="mes" data-act="mes-hoje" title="Voltar ao mês atual" id="mes-label"></button>
+            <button class="ic" data-act="mes-prox" aria-label="Próximo mês">›</button>
+          </div>
+        </div>
+        <form id="rapido" class="rapido" autocomplete="off">
+          <input placeholder="Lançar rápido: luz 185,90 dia 10 · mercado 230 nubank · tv 2.400 10x" aria-label="Lançamento rápido">
+          <button class="btn prim" title="Lançar">+ Lançar</button>
+        </form>
+      </header>
+      <div id="banner" class="banner" hidden></div>
+      <div id="view" class="view"></div>
+    </main>
+
+    <nav class="inferior">
+      <a href="#painel"><span>🏠</span>Painel<b class="badge" data-badge="alertas" hidden></b></a>
+      <a href="#contas"><span>📋</span>Contas</a>
+      <a href="#calendario"><span>🗓️</span>Agenda</a>
+      <a href="#cartoes"><span>💳</span>Cartões</a>
+      <a href="#planejamento"><span>🎯</span>Plano</a>
+      <a href="#config"><span>⚙️</span>Ajustes</a>
+    </nav>
+  </div>
+
+  <dialog id="modal"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
