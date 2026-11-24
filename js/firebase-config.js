@@ -1,10 +1,10 @@
-// Cole aqui a configuração do seu projeto Firebase (Console do Firebase > Configurações do projeto > Seus apps > Web).
-// Enquanto ficar vazio (apiKey: ''), o sistema funciona no MODO LOCAL: os dados ficam só neste navegador.
+// Configuração do projeto Firebase "laremdia" (Console do Firebase > Configurações do projeto > Seus apps > Lar em Dia Web).
+// Enquanto a apiKey ficar vazia, o sistema funciona no MODO LOCAL (dados só no navegador).
 export const firebaseConfig = {
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-  appId: ''
+  apiKey: '', // <- cole aqui, entre as aspas, a apiKey que aparece no Console do Firebase
+  authDomain: 'laremdia-43553.firebaseapp.com',
+  projectId: 'laremdia-43553',
+  storageBucket: 'laremdia-43553.firebasestorage.app',
+  messagingSenderId: '708908678116',
+  appId: '1:708908678116:web:4402ec833711d4f7a4a5f1'
 };
