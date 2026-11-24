@@ -1,0 +1,44 @@
+rules_version = '2';
+// Regras de segurança do Lar em Dia (cole em Firestore > Regras e clique em Publicar)
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function logado() { return request.auth != null; }
+    function membro(hid) { return logado() && request.auth.uid in get(/databases/$(database)/documents/households/$(hid)).data.usuarios; }
+
+    // Perfil do usuário: só o próprio
+    match /users/{uid} {
+      allow read, write: if logado() && request.auth.uid == uid;
+    }
+
+    // Família
+    match /households/{hid} {
+      allow read: if logado() && request.auth.uid in resource.data.usuarios;
+      allow create: if logado() && request.resource.data.owner == request.auth.uid
+                    && request.resource.data.usuarios == [request.auth.uid];
+      // Membros podem atualizar (sem trocar o dono)
+      allow update: if logado() && request.auth.uid in resource.data.usuarios
+                    && request.resource.data.owner == resource.data.owner;
+      // Quem tem o código de convite pode se incluir (e só isso)
+      allow update: if logado()
+                    && request.resource.data.joinCode == resource.data.inviteCode
+                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['usuarios', 'joinCode'])
+                    && request.resource.data.usuarios.hasAll(resource.data.usuarios)
+                    && request.resource.data.usuarios.size() == resource.data.usuarios.size() + 1
+                    && request.auth.uid in request.resource.data.usuarios;
+      allow delete: if logado() && request.auth.uid == resource.data.owner;
+
+      // Contas, cartões, categorias, pessoas, recorrências
+      match /itens/{id} {
+        allow read, write: if membro(hid);
+      }
+    }
+
+    // Códigos de convite: leitura só pelo código exato (não dá para listar)
+    match /invites/{code} {
+      allow get: if logado();
+      allow list: if false;
+      allow create: if logado() && request.auth.uid in getAfter(/databases/$(database)/documents/households/$(request.resource.data.hid)).data.usuarios;
+      allow delete: if logado() && request.auth.uid in get(/databases/$(database)/documents/households/$(resource.data.hid)).data.usuarios;
+    }
+  }
+}
