@@ -1,0 +1,25 @@
+{
+  "name": "Lar em Dia — contas da família",
+  "short_name": "Lar em Dia",
+  "description": "Contas da casa em dia, com alertas de vencimento e planejamento familiar.",
+  "start_url": "./#painel",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f5",
+  "theme_color": "#0f766e",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
